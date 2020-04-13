@@ -1,0 +1,68 @@
+ID: ext
+_schema-version: '2.1'
+description: Similar to internal project caps/ext-java but with NodeJS
+version: 0.0.1
+
+modules:
+
+### New Modules Here ###
+
+ - name: ext-hdb
+   type: hdb
+   path: db
+   parameters:
+      memory: 512M
+      disk-quota: 512M
+   requires:
+    - name: ext-hdi
+
+ - name: ext-srv
+   type: nodejs
+   path: srv
+   parameters:
+      memory: 512M
+      disk-quota: 512M
+   provides:
+    - name: ext_srv_api
+      properties:
+         url: ${default-url}
+   requires:
+    - name: ext-hdi
+    - name: ext-uaa
+
+
+ - name: ext-web
+   type: html5
+   path: web
+   parameters:
+      disk-quota: 256M
+      memory: 256M
+   requires:
+    - name: ext-uaa
+   ### New Destinations Here ###
+    - name: ext_srv_api
+      group: destinations
+      properties:
+         name: ext_srv_be
+         url: ~{url}
+         forwardAuthToken: true
+
+resources:
+
+### New Resources Here ###
+
+ - name: ext-hdi
+   type: com.sap.xs.hdi-container
+   parameters:
+      service-name: EXT_HDI
+      config:
+         schema: EXT_DB
+
+ - name: ext-uaa
+   parameters:
+      path: ./xs-security.json
+      service-plan: application
+      service: xsuaa
+      service-name: EXT_UAA
+   type: org.cloudfoundry.managed-service
+

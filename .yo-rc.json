@@ -1,0 +1,21 @@
+{
+  "generator-sap-partner-eng": {
+    "project_name": "ext-node",
+    "app_name": "ext",
+    "app_desc": "Similart to internal project caps/ext-java but with NodeJS",
+    "router_name": "ext-web",
+    "router_dir": "web",
+    "uaa_res_name": "ext-uaa",
+    "uaa_svc_name": "EXT_UAA",
+    "db_name": "ext-hdb",
+    "db_dir": "db",
+    "db_schema_name": "EXT_DB",
+    "hdi_res_name": "ext-hdi",
+    "hdi_svc_name": "EXT_HDI",
+    "srv_name": "ext-srv",
+    "srv_dir": "srv",
+    "srv_api": "ext_srv_api",
+    "srv_be": "ext_srv_be",
+    "srv_route": "catalog"
+  }
+}
